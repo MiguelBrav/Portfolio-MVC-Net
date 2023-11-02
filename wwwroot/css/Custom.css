@@ -1,0 +1,25 @@
+﻿body {
+}
+
+#photo {
+    margin: 2rem 0;
+    border-radius: 50%;
+    border-width: 1px;
+    border-style: solid;
+    border-color: black;
+}
+
+.title-skills{
+    font-weight:bold;
+    color: indigo;
+}
+
+.skills{
+    background-color:skyblue;
+}
+
+.skills ul{
+    list-style:none;
+    padding: 0 0 0 0;
+
+}
