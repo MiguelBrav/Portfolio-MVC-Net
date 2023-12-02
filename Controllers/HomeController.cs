@@ -23,7 +23,26 @@ namespace Portfolio.Controllers
             return View(home);
         }
 
-        public IActionResult Privacy()
+        public IActionResult Projects()
+        {
+            var proyects = _projectRepository.GetProyects();
+            return View(proyects);
+        }
+
+        public IActionResult Contact()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Contact(ContactViewModel contactModel)
+        {
+            if(contactModel.Email != null && contactModel.Message != null && contactModel.Name != null)
+                return RedirectToAction("Thanks");
+
+            return View();
+        }
+        public IActionResult Thanks()
         {
             return View();
         }

@@ -1,0 +1,29 @@
+﻿@model IEnumerable<ProyectDTO>
+
+@if (Model is not null)
+{
+
+    <div class="container">
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            @foreach (var project in Model)
+            {
+                <div class="col">
+                    <div class="card h-100">
+                        <img src="@project.ImageUrl" class="card-img-top" alt="img-project" style="height:200px">
+                        <div class=card-body>
+                            <h5 class="card-title">@project.Title</h5>
+                            <p class="card-text">@project.Description</p>
+
+                            <div class="card-footer">
+                                <a class="btn btn-primary" href="@project.RepositoryUrl" target="_blank" rel="noopener noreferrer">Visit the code project</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+
+    </div>
+}
+
