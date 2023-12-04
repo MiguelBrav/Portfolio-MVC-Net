@@ -2,6 +2,8 @@
 using Portfolio.Models;
 using Portfolio.Services.Interfaces;
 using System.Diagnostics;
+using System.Net.Mail;
+using System.Net;
 
 namespace Portfolio.Controllers
 {
@@ -9,11 +11,13 @@ namespace Portfolio.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IProjectService _projectRepository;
+        private readonly IMailService _mailRepository;
 
-        public HomeController(ILogger<HomeController> logger, IProjectService projectRepository)
+        public HomeController(ILogger<HomeController> logger, IProjectService projectRepository, IMailService mailRepository)
         {
             _logger = logger;
             _projectRepository = projectRepository;
+            _mailRepository = mailRepository;
         }
 
         public IActionResult Index()
@@ -37,14 +41,31 @@ namespace Portfolio.Controllers
         [HttpPost]
         public IActionResult Contact(ContactViewModel contactModel)
         {
-            if(contactModel.Email != null && contactModel.Message != null && contactModel.Name != null)
-                return RedirectToAction("Thanks");
+            if (contactModel.Email != null && contactModel.Message != null && contactModel.Name != null)
+                return RedirectToAction("Thanks", contactModel);
 
             return View();
         }
-        public IActionResult Thanks()
+        public async Task<IActionResult> Thanks(ContactViewModel contactModel)
         {
-            return View();
+            try
+            {
+                bool isSuccess = await _mailRepository.SendEmail(contactModel);
+
+                if(isSuccess)
+                {
+                    return View();
+                }
+
+                return RedirectToAction("Error");
+
+            }
+            catch (Exception)
+            {
+
+                return RedirectToAction("Error");
+
+            }
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
