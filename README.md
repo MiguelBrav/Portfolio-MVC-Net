@@ -6,7 +6,7 @@ This project is a compact and efficient implementation of a portfolio using Razo
 
 ## Usage example online
 
-You can checkout the project here: "https://portfoliomvc.application-service.work/"
+You can checkout the project here: "https://portfoliomvc.segurab.com/"
 
 
 ![App Screenshot](https://res.cloudinary.com/imgresd/image/upload/v1701907663/Github/poypymifygvriqqv9xb3.png)
